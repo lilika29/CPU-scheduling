@@ -7,6 +7,9 @@
 using namespace System;
 using namespace System::Runtime::InteropServices;
 #define max(a, b)  (((a) > (b)) ? (a) : (b)) 
+#define min(a, b)  (((a) < (b)) ? (a) : (b)) 
+#include <math.h>
+#include <stdio.h>
 using namespace System;
 
 using namespace System::IO;
@@ -31,6 +34,7 @@ namespace testmmdi {
 	/// </summary>
 	const int n = 20;
 	const int lifeTime = 10000;
+	const int Quanum = 5;
 	int rowN = 0;
 	public ref class MyForm : public System::Windows::Forms::Form
 	{
@@ -213,6 +217,11 @@ private: System::Windows::Forms::Label^ lb61;
 private: System::Windows::Forms::Label^ lb60;
 
 	private: System::Windows::Forms::Label^ label83;
+private: System::Windows::Forms::Button^ button2;
+private: System::Windows::Forms::Button^ button3;
+private: System::Windows::Forms::Button^ button4;
+
+
 
 	protected:
 	private:
@@ -314,6 +323,9 @@ private: System::Windows::Forms::Label^ lb60;
 			this->lb61 = (gcnew System::Windows::Forms::Label());
 			this->lb60 = (gcnew System::Windows::Forms::Label());
 			this->label83 = (gcnew System::Windows::Forms::Label());
+			this->button2 = (gcnew System::Windows::Forms::Button());
+			this->button3 = (gcnew System::Windows::Forms::Button());
+			this->button4 = (gcnew System::Windows::Forms::Button());
 			this->SuspendLayout();
 			// 
 			// textBox3
@@ -324,23 +336,23 @@ private: System::Windows::Forms::Label^ lb60;
 			this->textBox3->Name = L"textBox3";
 			this->textBox3->Size = System::Drawing::Size(252, 380);
 			this->textBox3->TabIndex = 3;
-			this->textBox3->Text = L"C:\\Users\\laghd\\source\\repos\\testmmdi\\file.txt";
+			this->textBox3->Text = L"C:\\Users\\laghd\\source\\repos\\testmmdi\\file3.txt";
 			this->textBox3->TextChanged += gcnew System::EventHandler(this, &MyForm::textBox3_TextChanged);
 			// 
 			// textBox1
 			// 
 			this->textBox1->BackColor = System::Drawing::Color::Yellow;
-			this->textBox1->Location = System::Drawing::Point(525, 554);
+			this->textBox1->Location = System::Drawing::Point(710, 498);
 			this->textBox1->Margin = System::Windows::Forms::Padding(4, 5, 4, 5);
 			this->textBox1->Multiline = true;
 			this->textBox1->Name = L"textBox1";
-			this->textBox1->Size = System::Drawing::Size(55, 35);
+			this->textBox1->Size = System::Drawing::Size(158, 35);
 			this->textBox1->TabIndex = 4;
 			this->textBox1->Text = L"time";
 			// 
 			// label5
 			// 
-			this->label5->Location = System::Drawing::Point(1453, 13);
+			this->label5->Location = System::Drawing::Point(874, 11);
 			this->label5->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
 			this->label5->Name = L"label5";
 			this->label5->Size = System::Drawing::Size(93, 20);
@@ -350,7 +362,7 @@ private: System::Windows::Forms::Label^ lb60;
 			// 
 			// label4
 			// 
-			this->label4->Location = System::Drawing::Point(1378, 13);
+			this->label4->Location = System::Drawing::Point(799, 11);
 			this->label4->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
 			this->label4->Name = L"label4";
 			this->label4->Size = System::Drawing::Size(69, 20);
@@ -361,7 +373,7 @@ private: System::Windows::Forms::Label^ lb60;
 			// 
 			// label3
 			// 
-			this->label3->Location = System::Drawing::Point(1294, 13);
+			this->label3->Location = System::Drawing::Point(715, 11);
 			this->label3->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
 			this->label3->Name = L"label3";
 			this->label3->Size = System::Drawing::Size(76, 20);
@@ -371,7 +383,7 @@ private: System::Windows::Forms::Label^ lb60;
 			// 
 			// label2
 			// 
-			this->label2->Location = System::Drawing::Point(1212, 13);
+			this->label2->Location = System::Drawing::Point(633, 11);
 			this->label2->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
 			this->label2->Name = L"label2";
 			this->label2->Size = System::Drawing::Size(74, 20);
@@ -421,7 +433,7 @@ private: System::Windows::Forms::Label^ lb60;
 			// lb1
 			// 
 			this->lb1->AutoSize = true;
-			this->lb1->Location = System::Drawing::Point(1235, 43);
+			this->lb1->Location = System::Drawing::Point(656, 41);
 			this->lb1->Name = L"lb1";
 			this->lb1->Size = System::Drawing::Size(14, 20);
 			this->lb1->TabIndex = 11;
@@ -430,7 +442,7 @@ private: System::Windows::Forms::Label^ lb60;
 			// lb2
 			// 
 			this->lb2->AutoSize = true;
-			this->lb2->Location = System::Drawing::Point(1308, 43);
+			this->lb2->Location = System::Drawing::Point(729, 41);
 			this->lb2->Name = L"lb2";
 			this->lb2->Size = System::Drawing::Size(14, 20);
 			this->lb2->TabIndex = 12;
@@ -439,7 +451,7 @@ private: System::Windows::Forms::Label^ lb60;
 			// lb3
 			// 
 			this->lb3->AutoSize = true;
-			this->lb3->Location = System::Drawing::Point(1394, 43);
+			this->lb3->Location = System::Drawing::Point(815, 41);
 			this->lb3->Name = L"lb3";
 			this->lb3->Size = System::Drawing::Size(14, 20);
 			this->lb3->TabIndex = 13;
@@ -448,7 +460,7 @@ private: System::Windows::Forms::Label^ lb60;
 			// lb4
 			// 
 			this->lb4->AutoSize = true;
-			this->lb4->Location = System::Drawing::Point(1471, 43);
+			this->lb4->Location = System::Drawing::Point(892, 41);
 			this->lb4->Name = L"lb4";
 			this->lb4->Size = System::Drawing::Size(14, 20);
 			this->lb4->TabIndex = 14;
@@ -457,7 +469,7 @@ private: System::Windows::Forms::Label^ lb60;
 			// lb9
 			// 
 			this->lb9->AutoSize = true;
-			this->lb9->Location = System::Drawing::Point(1471, 63);
+			this->lb9->Location = System::Drawing::Point(892, 61);
 			this->lb9->Name = L"lb9";
 			this->lb9->Size = System::Drawing::Size(14, 20);
 			this->lb9->TabIndex = 20;
@@ -466,7 +478,7 @@ private: System::Windows::Forms::Label^ lb60;
 			// lb8
 			// 
 			this->lb8->AutoSize = true;
-			this->lb8->Location = System::Drawing::Point(1394, 63);
+			this->lb8->Location = System::Drawing::Point(815, 61);
 			this->lb8->Name = L"lb8";
 			this->lb8->Size = System::Drawing::Size(14, 20);
 			this->lb8->TabIndex = 19;
@@ -475,7 +487,7 @@ private: System::Windows::Forms::Label^ lb60;
 			// lb7
 			// 
 			this->lb7->AutoSize = true;
-			this->lb7->Location = System::Drawing::Point(1308, 63);
+			this->lb7->Location = System::Drawing::Point(729, 61);
 			this->lb7->Name = L"lb7";
 			this->lb7->Size = System::Drawing::Size(14, 20);
 			this->lb7->TabIndex = 18;
@@ -484,7 +496,7 @@ private: System::Windows::Forms::Label^ lb60;
 			// lb6
 			// 
 			this->lb6->AutoSize = true;
-			this->lb6->Location = System::Drawing::Point(1235, 63);
+			this->lb6->Location = System::Drawing::Point(656, 61);
 			this->lb6->Name = L"lb6";
 			this->lb6->Size = System::Drawing::Size(14, 20);
 			this->lb6->TabIndex = 17;
@@ -511,7 +523,7 @@ private: System::Windows::Forms::Label^ lb60;
 			// lb19
 			// 
 			this->lb19->AutoSize = true;
-			this->lb19->Location = System::Drawing::Point(1471, 107);
+			this->lb19->Location = System::Drawing::Point(892, 105);
 			this->lb19->Name = L"lb19";
 			this->lb19->Size = System::Drawing::Size(14, 20);
 			this->lb19->TabIndex = 32;
@@ -520,7 +532,7 @@ private: System::Windows::Forms::Label^ lb60;
 			// lb18
 			// 
 			this->lb18->AutoSize = true;
-			this->lb18->Location = System::Drawing::Point(1394, 107);
+			this->lb18->Location = System::Drawing::Point(815, 105);
 			this->lb18->Name = L"lb18";
 			this->lb18->Size = System::Drawing::Size(14, 20);
 			this->lb18->TabIndex = 31;
@@ -529,7 +541,7 @@ private: System::Windows::Forms::Label^ lb60;
 			// lb17
 			// 
 			this->lb17->AutoSize = true;
-			this->lb17->Location = System::Drawing::Point(1308, 107);
+			this->lb17->Location = System::Drawing::Point(729, 105);
 			this->lb17->Name = L"lb17";
 			this->lb17->Size = System::Drawing::Size(14, 20);
 			this->lb17->TabIndex = 30;
@@ -538,7 +550,7 @@ private: System::Windows::Forms::Label^ lb60;
 			// lb16
 			// 
 			this->lb16->AutoSize = true;
-			this->lb16->Location = System::Drawing::Point(1235, 107);
+			this->lb16->Location = System::Drawing::Point(656, 105);
 			this->lb16->Name = L"lb16";
 			this->lb16->Size = System::Drawing::Size(14, 20);
 			this->lb16->TabIndex = 29;
@@ -565,7 +577,7 @@ private: System::Windows::Forms::Label^ lb60;
 			// lb14
 			// 
 			this->lb14->AutoSize = true;
-			this->lb14->Location = System::Drawing::Point(1471, 87);
+			this->lb14->Location = System::Drawing::Point(892, 85);
 			this->lb14->Name = L"lb14";
 			this->lb14->Size = System::Drawing::Size(14, 20);
 			this->lb14->TabIndex = 26;
@@ -574,7 +586,7 @@ private: System::Windows::Forms::Label^ lb60;
 			// lb13
 			// 
 			this->lb13->AutoSize = true;
-			this->lb13->Location = System::Drawing::Point(1394, 87);
+			this->lb13->Location = System::Drawing::Point(815, 85);
 			this->lb13->Name = L"lb13";
 			this->lb13->Size = System::Drawing::Size(14, 20);
 			this->lb13->TabIndex = 25;
@@ -583,7 +595,7 @@ private: System::Windows::Forms::Label^ lb60;
 			// lb12
 			// 
 			this->lb12->AutoSize = true;
-			this->lb12->Location = System::Drawing::Point(1308, 87);
+			this->lb12->Location = System::Drawing::Point(729, 85);
 			this->lb12->Name = L"lb12";
 			this->lb12->Size = System::Drawing::Size(14, 20);
 			this->lb12->TabIndex = 24;
@@ -592,7 +604,7 @@ private: System::Windows::Forms::Label^ lb60;
 			// lb11
 			// 
 			this->lb11->AutoSize = true;
-			this->lb11->Location = System::Drawing::Point(1235, 87);
+			this->lb11->Location = System::Drawing::Point(656, 85);
 			this->lb11->Name = L"lb11";
 			this->lb11->Size = System::Drawing::Size(14, 20);
 			this->lb11->TabIndex = 23;
@@ -619,7 +631,7 @@ private: System::Windows::Forms::Label^ lb60;
 			// lb29
 			// 
 			this->lb29->AutoSize = true;
-			this->lb29->Location = System::Drawing::Point(1471, 150);
+			this->lb29->Location = System::Drawing::Point(892, 148);
 			this->lb29->Name = L"lb29";
 			this->lb29->Size = System::Drawing::Size(14, 20);
 			this->lb29->TabIndex = 44;
@@ -628,7 +640,7 @@ private: System::Windows::Forms::Label^ lb60;
 			// lb28
 			// 
 			this->lb28->AutoSize = true;
-			this->lb28->Location = System::Drawing::Point(1394, 150);
+			this->lb28->Location = System::Drawing::Point(815, 148);
 			this->lb28->Name = L"lb28";
 			this->lb28->Size = System::Drawing::Size(14, 20);
 			this->lb28->TabIndex = 43;
@@ -637,7 +649,7 @@ private: System::Windows::Forms::Label^ lb60;
 			// lb27
 			// 
 			this->lb27->AutoSize = true;
-			this->lb27->Location = System::Drawing::Point(1308, 150);
+			this->lb27->Location = System::Drawing::Point(729, 148);
 			this->lb27->Name = L"lb27";
 			this->lb27->Size = System::Drawing::Size(14, 20);
 			this->lb27->TabIndex = 42;
@@ -646,7 +658,7 @@ private: System::Windows::Forms::Label^ lb60;
 			// lb26
 			// 
 			this->lb26->AutoSize = true;
-			this->lb26->Location = System::Drawing::Point(1235, 150);
+			this->lb26->Location = System::Drawing::Point(656, 148);
 			this->lb26->Name = L"lb26";
 			this->lb26->Size = System::Drawing::Size(14, 20);
 			this->lb26->TabIndex = 41;
@@ -673,7 +685,7 @@ private: System::Windows::Forms::Label^ lb60;
 			// lb24
 			// 
 			this->lb24->AutoSize = true;
-			this->lb24->Location = System::Drawing::Point(1471, 130);
+			this->lb24->Location = System::Drawing::Point(892, 128);
 			this->lb24->Name = L"lb24";
 			this->lb24->Size = System::Drawing::Size(14, 20);
 			this->lb24->TabIndex = 38;
@@ -682,7 +694,7 @@ private: System::Windows::Forms::Label^ lb60;
 			// lb23
 			// 
 			this->lb23->AutoSize = true;
-			this->lb23->Location = System::Drawing::Point(1394, 130);
+			this->lb23->Location = System::Drawing::Point(815, 128);
 			this->lb23->Name = L"lb23";
 			this->lb23->Size = System::Drawing::Size(14, 20);
 			this->lb23->TabIndex = 37;
@@ -691,7 +703,7 @@ private: System::Windows::Forms::Label^ lb60;
 			// lb22
 			// 
 			this->lb22->AutoSize = true;
-			this->lb22->Location = System::Drawing::Point(1308, 130);
+			this->lb22->Location = System::Drawing::Point(729, 128);
 			this->lb22->Name = L"lb22";
 			this->lb22->Size = System::Drawing::Size(14, 20);
 			this->lb22->TabIndex = 36;
@@ -700,7 +712,7 @@ private: System::Windows::Forms::Label^ lb60;
 			// lb21
 			// 
 			this->lb21->AutoSize = true;
-			this->lb21->Location = System::Drawing::Point(1235, 130);
+			this->lb21->Location = System::Drawing::Point(656, 128);
 			this->lb21->Name = L"lb21";
 			this->lb21->Size = System::Drawing::Size(14, 20);
 			this->lb21->TabIndex = 35;
@@ -727,7 +739,7 @@ private: System::Windows::Forms::Label^ lb60;
 			// lb39
 			// 
 			this->lb39->AutoSize = true;
-			this->lb39->Location = System::Drawing::Point(1471, 195);
+			this->lb39->Location = System::Drawing::Point(892, 193);
 			this->lb39->Name = L"lb39";
 			this->lb39->Size = System::Drawing::Size(14, 20);
 			this->lb39->TabIndex = 56;
@@ -736,7 +748,7 @@ private: System::Windows::Forms::Label^ lb60;
 			// lb38
 			// 
 			this->lb38->AutoSize = true;
-			this->lb38->Location = System::Drawing::Point(1394, 195);
+			this->lb38->Location = System::Drawing::Point(815, 193);
 			this->lb38->Name = L"lb38";
 			this->lb38->Size = System::Drawing::Size(14, 20);
 			this->lb38->TabIndex = 55;
@@ -745,7 +757,7 @@ private: System::Windows::Forms::Label^ lb60;
 			// lb37
 			// 
 			this->lb37->AutoSize = true;
-			this->lb37->Location = System::Drawing::Point(1308, 195);
+			this->lb37->Location = System::Drawing::Point(729, 193);
 			this->lb37->Name = L"lb37";
 			this->lb37->Size = System::Drawing::Size(14, 20);
 			this->lb37->TabIndex = 54;
@@ -754,7 +766,7 @@ private: System::Windows::Forms::Label^ lb60;
 			// lb36
 			// 
 			this->lb36->AutoSize = true;
-			this->lb36->Location = System::Drawing::Point(1235, 195);
+			this->lb36->Location = System::Drawing::Point(656, 193);
 			this->lb36->Name = L"lb36";
 			this->lb36->Size = System::Drawing::Size(14, 20);
 			this->lb36->TabIndex = 53;
@@ -781,7 +793,7 @@ private: System::Windows::Forms::Label^ lb60;
 			// lb34
 			// 
 			this->lb34->AutoSize = true;
-			this->lb34->Location = System::Drawing::Point(1471, 175);
+			this->lb34->Location = System::Drawing::Point(892, 173);
 			this->lb34->Name = L"lb34";
 			this->lb34->Size = System::Drawing::Size(14, 20);
 			this->lb34->TabIndex = 50;
@@ -790,7 +802,7 @@ private: System::Windows::Forms::Label^ lb60;
 			// lb33
 			// 
 			this->lb33->AutoSize = true;
-			this->lb33->Location = System::Drawing::Point(1394, 175);
+			this->lb33->Location = System::Drawing::Point(815, 173);
 			this->lb33->Name = L"lb33";
 			this->lb33->Size = System::Drawing::Size(14, 20);
 			this->lb33->TabIndex = 49;
@@ -799,7 +811,7 @@ private: System::Windows::Forms::Label^ lb60;
 			// lb32
 			// 
 			this->lb32->AutoSize = true;
-			this->lb32->Location = System::Drawing::Point(1308, 175);
+			this->lb32->Location = System::Drawing::Point(729, 173);
 			this->lb32->Name = L"lb32";
 			this->lb32->Size = System::Drawing::Size(14, 20);
 			this->lb32->TabIndex = 48;
@@ -808,7 +820,7 @@ private: System::Windows::Forms::Label^ lb60;
 			// lb31
 			// 
 			this->lb31->AutoSize = true;
-			this->lb31->Location = System::Drawing::Point(1235, 175);
+			this->lb31->Location = System::Drawing::Point(656, 173);
 			this->lb31->Name = L"lb31";
 			this->lb31->Size = System::Drawing::Size(14, 20);
 			this->lb31->TabIndex = 47;
@@ -835,7 +847,7 @@ private: System::Windows::Forms::Label^ lb60;
 			// lb49
 			// 
 			this->lb49->AutoSize = true;
-			this->lb49->Location = System::Drawing::Point(1471, 241);
+			this->lb49->Location = System::Drawing::Point(892, 239);
 			this->lb49->Name = L"lb49";
 			this->lb49->Size = System::Drawing::Size(14, 20);
 			this->lb49->TabIndex = 68;
@@ -844,7 +856,7 @@ private: System::Windows::Forms::Label^ lb60;
 			// lb48
 			// 
 			this->lb48->AutoSize = true;
-			this->lb48->Location = System::Drawing::Point(1394, 241);
+			this->lb48->Location = System::Drawing::Point(815, 239);
 			this->lb48->Name = L"lb48";
 			this->lb48->Size = System::Drawing::Size(14, 20);
 			this->lb48->TabIndex = 67;
@@ -853,7 +865,7 @@ private: System::Windows::Forms::Label^ lb60;
 			// lb47
 			// 
 			this->lb47->AutoSize = true;
-			this->lb47->Location = System::Drawing::Point(1308, 241);
+			this->lb47->Location = System::Drawing::Point(729, 239);
 			this->lb47->Name = L"lb47";
 			this->lb47->Size = System::Drawing::Size(14, 20);
 			this->lb47->TabIndex = 66;
@@ -862,7 +874,7 @@ private: System::Windows::Forms::Label^ lb60;
 			// lb46
 			// 
 			this->lb46->AutoSize = true;
-			this->lb46->Location = System::Drawing::Point(1235, 241);
+			this->lb46->Location = System::Drawing::Point(656, 239);
 			this->lb46->Name = L"lb46";
 			this->lb46->Size = System::Drawing::Size(14, 20);
 			this->lb46->TabIndex = 65;
@@ -889,7 +901,7 @@ private: System::Windows::Forms::Label^ lb60;
 			// lb44
 			// 
 			this->lb44->AutoSize = true;
-			this->lb44->Location = System::Drawing::Point(1471, 221);
+			this->lb44->Location = System::Drawing::Point(892, 219);
 			this->lb44->Name = L"lb44";
 			this->lb44->Size = System::Drawing::Size(14, 20);
 			this->lb44->TabIndex = 62;
@@ -898,7 +910,7 @@ private: System::Windows::Forms::Label^ lb60;
 			// lb43
 			// 
 			this->lb43->AutoSize = true;
-			this->lb43->Location = System::Drawing::Point(1394, 221);
+			this->lb43->Location = System::Drawing::Point(815, 219);
 			this->lb43->Name = L"lb43";
 			this->lb43->Size = System::Drawing::Size(14, 20);
 			this->lb43->TabIndex = 61;
@@ -907,7 +919,7 @@ private: System::Windows::Forms::Label^ lb60;
 			// lb42
 			// 
 			this->lb42->AutoSize = true;
-			this->lb42->Location = System::Drawing::Point(1308, 221);
+			this->lb42->Location = System::Drawing::Point(729, 219);
 			this->lb42->Name = L"lb42";
 			this->lb42->Size = System::Drawing::Size(14, 20);
 			this->lb42->TabIndex = 60;
@@ -916,7 +928,7 @@ private: System::Windows::Forms::Label^ lb60;
 			// lb41
 			// 
 			this->lb41->AutoSize = true;
-			this->lb41->Location = System::Drawing::Point(1235, 221);
+			this->lb41->Location = System::Drawing::Point(656, 219);
 			this->lb41->Name = L"lb41";
 			this->lb41->Size = System::Drawing::Size(14, 20);
 			this->lb41->TabIndex = 59;
@@ -943,7 +955,7 @@ private: System::Windows::Forms::Label^ lb60;
 			// lb59
 			// 
 			this->lb59->AutoSize = true;
-			this->lb59->Location = System::Drawing::Point(1471, 285);
+			this->lb59->Location = System::Drawing::Point(892, 283);
 			this->lb59->Name = L"lb59";
 			this->lb59->Size = System::Drawing::Size(14, 20);
 			this->lb59->TabIndex = 80;
@@ -952,7 +964,7 @@ private: System::Windows::Forms::Label^ lb60;
 			// lb58
 			// 
 			this->lb58->AutoSize = true;
-			this->lb58->Location = System::Drawing::Point(1394, 285);
+			this->lb58->Location = System::Drawing::Point(815, 283);
 			this->lb58->Name = L"lb58";
 			this->lb58->Size = System::Drawing::Size(14, 20);
 			this->lb58->TabIndex = 79;
@@ -961,7 +973,7 @@ private: System::Windows::Forms::Label^ lb60;
 			// lb57
 			// 
 			this->lb57->AutoSize = true;
-			this->lb57->Location = System::Drawing::Point(1308, 285);
+			this->lb57->Location = System::Drawing::Point(729, 283);
 			this->lb57->Name = L"lb57";
 			this->lb57->Size = System::Drawing::Size(14, 20);
 			this->lb57->TabIndex = 78;
@@ -970,7 +982,7 @@ private: System::Windows::Forms::Label^ lb60;
 			// lb56
 			// 
 			this->lb56->AutoSize = true;
-			this->lb56->Location = System::Drawing::Point(1235, 285);
+			this->lb56->Location = System::Drawing::Point(656, 283);
 			this->lb56->Name = L"lb56";
 			this->lb56->Size = System::Drawing::Size(14, 20);
 			this->lb56->TabIndex = 77;
@@ -997,7 +1009,7 @@ private: System::Windows::Forms::Label^ lb60;
 			// lb54
 			// 
 			this->lb54->AutoSize = true;
-			this->lb54->Location = System::Drawing::Point(1471, 265);
+			this->lb54->Location = System::Drawing::Point(892, 263);
 			this->lb54->Name = L"lb54";
 			this->lb54->Size = System::Drawing::Size(14, 20);
 			this->lb54->TabIndex = 74;
@@ -1006,7 +1018,7 @@ private: System::Windows::Forms::Label^ lb60;
 			// lb53
 			// 
 			this->lb53->AutoSize = true;
-			this->lb53->Location = System::Drawing::Point(1394, 265);
+			this->lb53->Location = System::Drawing::Point(815, 263);
 			this->lb53->Name = L"lb53";
 			this->lb53->Size = System::Drawing::Size(14, 20);
 			this->lb53->TabIndex = 73;
@@ -1015,7 +1027,7 @@ private: System::Windows::Forms::Label^ lb60;
 			// lb52
 			// 
 			this->lb52->AutoSize = true;
-			this->lb52->Location = System::Drawing::Point(1308, 265);
+			this->lb52->Location = System::Drawing::Point(729, 263);
 			this->lb52->Name = L"lb52";
 			this->lb52->Size = System::Drawing::Size(14, 20);
 			this->lb52->TabIndex = 72;
@@ -1024,7 +1036,7 @@ private: System::Windows::Forms::Label^ lb60;
 			// lb51
 			// 
 			this->lb51->AutoSize = true;
-			this->lb51->Location = System::Drawing::Point(1235, 265);
+			this->lb51->Location = System::Drawing::Point(656, 263);
 			this->lb51->Name = L"lb51";
 			this->lb51->Size = System::Drawing::Size(14, 20);
 			this->lb51->TabIndex = 71;
@@ -1051,7 +1063,7 @@ private: System::Windows::Forms::Label^ lb60;
 			// lb64
 			// 
 			this->lb64->AutoSize = true;
-			this->lb64->Location = System::Drawing::Point(1471, 310);
+			this->lb64->Location = System::Drawing::Point(892, 308);
 			this->lb64->Name = L"lb64";
 			this->lb64->Size = System::Drawing::Size(14, 20);
 			this->lb64->TabIndex = 86;
@@ -1060,7 +1072,7 @@ private: System::Windows::Forms::Label^ lb60;
 			// lb63
 			// 
 			this->lb63->AutoSize = true;
-			this->lb63->Location = System::Drawing::Point(1394, 310);
+			this->lb63->Location = System::Drawing::Point(815, 308);
 			this->lb63->Name = L"lb63";
 			this->lb63->Size = System::Drawing::Size(14, 20);
 			this->lb63->TabIndex = 85;
@@ -1069,7 +1081,7 @@ private: System::Windows::Forms::Label^ lb60;
 			// lb62
 			// 
 			this->lb62->AutoSize = true;
-			this->lb62->Location = System::Drawing::Point(1308, 310);
+			this->lb62->Location = System::Drawing::Point(729, 308);
 			this->lb62->Name = L"lb62";
 			this->lb62->Size = System::Drawing::Size(14, 20);
 			this->lb62->TabIndex = 84;
@@ -1078,7 +1090,7 @@ private: System::Windows::Forms::Label^ lb60;
 			// lb61
 			// 
 			this->lb61->AutoSize = true;
-			this->lb61->Location = System::Drawing::Point(1235, 310);
+			this->lb61->Location = System::Drawing::Point(656, 308);
 			this->lb61->Name = L"lb61";
 			this->lb61->Size = System::Drawing::Size(14, 20);
 			this->lb61->TabIndex = 83;
@@ -1102,11 +1114,44 @@ private: System::Windows::Forms::Label^ lb60;
 			this->label83->TabIndex = 81;
 			this->label83->Text = L"cpu 7";
 			// 
+			// button2
+			// 
+			this->button2->Location = System::Drawing::Point(525, 498);
+			this->button2->Name = L"button2";
+			this->button2->Size = System::Drawing::Size(102, 35);
+			this->button2->TabIndex = 87;
+			this->button2->Text = L"SJF";
+			this->button2->UseVisualStyleBackColor = true;
+			this->button2->Click += gcnew System::EventHandler(this, &MyForm::button2_Click);
+			// 
+			// button3
+			// 
+			this->button3->Location = System::Drawing::Point(367, 541);
+			this->button3->Name = L"button3";
+			this->button3->Size = System::Drawing::Size(112, 32);
+			this->button3->TabIndex = 88;
+			this->button3->Text = L"RR";
+			this->button3->UseVisualStyleBackColor = true;
+			this->button3->Click += gcnew System::EventHandler(this, &MyForm::button3_Click_1);
+			// 
+			// button4
+			// 
+			this->button4->Location = System::Drawing::Point(562, 549);
+			this->button4->Name = L"button4";
+			this->button4->Size = System::Drawing::Size(75, 23);
+			this->button4->TabIndex = 89;
+			this->button4->Text = L"fcfs";
+			this->button4->UseVisualStyleBackColor = true;
+			this->button4->Click += gcnew System::EventHandler(this, &MyForm::button4_Click);
+			// 
 			// MyForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(9, 20);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->ClientSize = System::Drawing::Size(1856, 808);
+			this->Controls->Add(this->button4);
+			this->Controls->Add(this->button3);
+			this->Controls->Add(this->button2);
 			this->Controls->Add(this->lb64);
 			this->Controls->Add(this->lb63);
 			this->Controls->Add(this->lb62);
@@ -1238,10 +1283,9 @@ private: System::Void button1_Click_1(System::Object^ sender, System::EventArgs^
 }
 private: System::Void button3_Click(System::Object^ sender, System::EventArgs^ e) {
 }
-	   
+	   //FCFS
 	private: System::Void button1_Click_2(System::Object^ sender, System::EventArgs^ e) {
-		/*const int n = 20;
-		const int lifeTime = 10000;*/
+		
 		int matrix[1000][n]{};
 		int lim[n];
 		System::String^ ads = textBox3->Text;
@@ -1321,7 +1365,7 @@ private: System::Void button3_Click(System::Object^ sender, System::EventArgs^ e
 			textBox1->Text = temp;
 			this->Refresh();
 			
-			if (c == 9) {
+			if (c == 99) {
 				time++;
 				c = 1;
 				// ready to go to running 
@@ -1411,8 +1455,640 @@ private: System::Void button3_Click(System::Object^ sender, System::EventArgs^ e
 			 }
 		 textBox3->Text += "\r\n label: " + labelName + " NOT FOUND!";
 	}
+//sjf
+private: System::Void button2_Click(System::Object^ sender, System::EventArgs^ e) {
+	int matrix[1000][n]{};
+	int totalProcTime[1000];
+	int idxOrder[1000];
+	for(int i =0; i<1000;i++)
+		totalProcTime[i]=0;
+
+	int lim[n];
+	System::String^ ads = textBox3->Text;
+
+	int maxTime = 1;
+	for (int i = 0; i < n; i++)
+		lim[i] = 0;
+	try {
+		//reading the file:
+		StreamReader^ reader = gcnew   StreamReader(ads);
+
+		do
+		{
+			String^ line = reader->ReadLine();
+			// 0 0  6  8 15 6 10 7 10 8 13 7 15 3 spilte(line,' ')
+			// newE ? 0 -> 0
+
+			String^ tp = "";
+			int clmn = 0;
+			for (int j = 0; j < line->Length; j++) {
+				if (line[j] != ' ')
+					tp += line[j];
+				else if (line[j] == ' ') {
+					// tp convert to int 
+					int IntTp = int::Parse(tp); // string to int
+					tp = "";
+					// tp saved in matrix[row][j]
+					matrix[rowN][clmn] = IntTp;
+					
+
+					if (clmn == 0) {
+						lim[0] = max(lim[0], IntTp);
+						
+					}
+					
+
+					else {
+						if (clmn >= 3) {
+							totalProcTime[rowN] += IntTp;
+						}
+
+						lim[clmn] += IntTp;
+					}
+					clmn++;
+				}
+				
+			}
+
+			if (tp != "") {
+				int IntTp = int::Parse(tp); //  string^ to int
+				tp = "";
+				// tp saved in matrix[row][j]
+				matrix[rowN][clmn] = IntTp;
+				if (clmn == 0)
+					lim[0] = max(lim[0], IntTp);
+				else {
+					if (clmn >= 3) {
+						totalProcTime[rowN] += IntTp;
+					}
+					lim[clmn] += IntTp;
+				}
+				clmn++;
+			}
+			//****
+			
+			//concerting string^ to strong: string^ line to string line
+			using namespace Runtime::InteropServices;
+			const char* chars =
+				(const char*)(Marshal::StringToHGlobalAnsi(line)).ToPointer();
+
+			textBox3->Text = textBox3->Text + "\r\n" + line;
+			rowN++;
+		} while (reader->Peek() != -1); // using do while to read till end of file
+
+		for (int i = 3; i < n; i++)
+			maxTime = max(maxTime, lim[i]);
+		maxTime += lim[0];
+	}
+	catch (System::Exception^ e) {}
+	int c = 1;
+	int time = -1;
+	textBox1->Text = time.ToString();
+	this->Refresh();
+	int runExp[n];
+	for (int t = 0; t < n; t++)
+		runExp[t] = -2;
+	//***
+
+	int mini;
+	for (int i = 0; i < rowN; i++)
+		idxOrder[i] = i;
+
+
+	for (int i = 0; i < rowN-1; i++) {
+		mini = i;
+		for (int j = i + 1; j < rowN; j++)
+			if (matrix[idxOrder[j]][0] * 100 + totalProcTime[idxOrder[j]] < matrix[mini][0] * 100 + totalProcTime[mini])
+				mini = j;
+		idxOrder[i] = idxOrder[mini];
+		idxOrder[mini] = i;
+	}
+	
+	//
+	while (true) {
+		c++;
+		if (time > maxTime)
+			break;
+		String^ temp = time.ToString() + ":" + floor(c * 59 / 9).ToString(); //59 is sec
+		textBox1->Text = temp;
+		this->Refresh();
+
+		if (c == 9) {
+			time++;
+			c = 1;
+			// ready to go to running 
+			// int running vacant =12 
+			for (int i = 0; i < rowN; i++) {//%%%%%%%%%%% i was 0 i put it -1 
+				for (int j = 0; j < n; j++)
+					//***
+					
+					if (time == runExp[j]) {
+						//String^ lblName = "lb" + (j * 5 + 2).ToString(); // find label name of cpu/io j lb+ j*5+2 
+						Control^ r = getEl(j, 2);
+						textBox3->Text += "\r\n label: " + r->Text;
+						Control^ t = getEl(j, 4);
+						if (r->Text == "-")
+							continue;
+						if (t->Text == "-")
+							t->Text = r->Text;
+						else
+							t->Text += "," + r->Text;
+						r->Text = "-";
+						this->Refresh();
+						Control^ nw = getEl(j, 0);
+						String^ newbees = nw->Text;
+						if (newbees == "-")
+							continue;
+						int kamai = newbees->IndexOf(","); // 1,1,4  -> 1,4   // 1 -> -
+						String^ newTop = "";
+						if (kamai == -1) {
+							newTop = newbees;
+							newbees = "-";
+						}
+						else {
+							newTop = newbees->Substring(0, kamai);  //?
+							newbees = newbees->Substring(kamai + 1);
+						}
+						nw->Text = newbees;
+						this->Refresh();
+
+						r->Text = newTop;
+						nw->Text = newbees;
+						this->Refresh();
+						// empty and fill with head of new
+						runExp[j] += matrix[System::Convert::ToInt32(newTop)][j]; // update runexp for new running proc: runexp[j]+=matrix[head of new][j]
+
+					}
+				// running :
+				//??
+				if (matrix[i][0] == time) {  // arrival is matching with time						
+					for (int j = 3; j < n && matrix[idxOrder[i]][j] != 0; j++) {
+						Control^ runningPcs = getEl(j - 3, 2); // state 2= running
+						if (runningPcs->Text == "-") {  // running of resource j is vacant
+							runningPcs->Text = "";
+							runningPcs->Text += matrix[idxOrder[i]][1];// put id in running
+
+							runExp[j - 3] = time + matrix[idxOrder[i]][j];  // now + duration
+							this->Refresh();
+							continue;
+						}
+						// filling Lable New :
+						//if (matrix[i][j] != 0) { // j=4 -> "lb(j-3)*5   
+						String^ labelName = "lb" + ((j - 3) * 5).ToString();
+						textBox3->Text += "\r\n label: " + labelName;
+						for each (Control ^ c in this->Controls)
+							
+								if (c->Name == labelName) {
+									textBox3->Text += "\r\n label: " + labelName + "Found!";
+									if (c->Text == "-") {
+										c->Text = "";
+										c->Text += matrix[idxOrder[i]][1];
+										
+									}
+									else c->Text += ", " + matrix[idxOrder[i]][1];
+									
+									this->Refresh();
+									
+								}
+							//}
+
+					}
+				}
+			}
+		}
+
+
+	}
+}
+	  
+
+
+
+private: System::Void button3_Click_1(System::Object^ sender, System::EventArgs^ e) {
+	int matrix[1000][n]{};
+	int lim[n];
+	System::String^ ads = textBox3->Text;
+
+	int maxTime = 1;
+	for (int i = 0; i < n; i++)
+		lim[i] = 0;
+	try {
+		//reading the file:
+		StreamReader^ reader = gcnew   StreamReader(ads);
+
+		do
+		{
+			String^ line = reader->ReadLine();
+			// 0 0  6  8 15 6 10 7 10 8 13 7 15 3 spilte(line,' ')
+			// newE ? 0 -> 0
+
+			String^ tp = "";
+			int clmn = 0;
+			for (int j = 0; j < line->Length; j++) {
+				if (line[j] != ' ')
+					tp += line[j];
+				else if (line[j] == ' ') {
+					// tp convert to int 
+					int IntTp = int::Parse(tp); // string to int
+					tp = "";
+					// tp saved in matrix[row][j]
+					matrix[rowN][clmn] = IntTp;
+					if (clmn == 0)
+
+						lim[0] = max(lim[0], IntTp);
+					else {
+						lim[clmn] += IntTp;
+					}
+					clmn++;
+				}
+			}
+
+			if (tp != "") {
+				int IntTp = int::Parse(tp); //  string^ to int
+				tp = "";
+				// tp saved in matrix[row][j]
+				matrix[rowN][clmn] = IntTp;
+				if (clmn == 0)
+					lim[0] = max(lim[0], IntTp);
+				else {
+					lim[clmn] += IntTp;
+				}
+				clmn++;
+			}
+			//concerting string^ to strong: string^ line to string line
+			using namespace Runtime::InteropServices;
+			const char* chars =
+				(const char*)(Marshal::StringToHGlobalAnsi(line)).ToPointer();
+
+			textBox3->Text = textBox3->Text + "\r\n" + line;
+			rowN++;
+		} while (reader->Peek() != -1); // using do while to read till end of file
+
+		for (int i = 3; i < n; i++)
+			maxTime = max(maxTime, lim[i]);
+		maxTime += lim[0];
+	}
+	catch (System::Exception^ e) {}
+	int c = 1;
+	int time = -1;
+	int runner = -1;
+	textBox1->Text = time.ToString();
+	this->Refresh();
+	int runExp[n];
+	for (int t = 0; t < n; t++)
+		runExp[t] = -2;
+	//***
+	//***
+
+
+	while (true) {
+		c++;
+		if (time > maxTime)
+			break;
+		String^ temp = time.ToString() + ":" + floor(c * 59 / 9).ToString(); //59 is sec
+		textBox1->Text = temp;
+		this->Refresh();
+
+		if (c == 9) {
+			time++;
+			c = 1;
+			//implementing terminated lable:
+			// int running vacant =12 
+			for (int i = 0; i < rowN; i++) {
+				for (int j = 0; j < n; j++)
+
+					if (time == runExp[j]) {
+						//String^ lblName = "lb" + (j * 5 + 2).ToString(); // find label name of cpu/io j lb+ j*5+2 
+						Control^ r = getEl(j, 2);
+						runner = System::Convert::ToInt32(r->Text);
+						textBox3->Text += "\r\n label: " + r->Text;
+						Control^ t = getEl(j, 4);
+						if (r->Text == "-")
+							continue;
+						if (matrix[runner][j+3] == 0) {  // b-time 
+							if (t->Text == "-")
+								t->Text = r->Text;
+							else
+								t->Text += "," + r->Text;
+						}
+						else {
+							// goes back to New lable
+							Control^ nw = getEl(j, 0);
+							String^ newbees = nw->Text;
+							if (newbees == "-")
+								nw->Text = "" + matrix[runner][1];
+							else nw->Text += "," + matrix[runner][1];
+							matrix[runner][j + 3] = Quanum > matrix[runner][j + 3] ? 0 : matrix[runner][j + 3] - Quanum;// update new b-time
+							
+						}
+						r->Text = "-";
+						this->Refresh();
+						Control^ nw = getEl(j, 0);
+						String^ newbees = nw->Text;
+						if (newbees == "-")
+							continue;
+						int kamai = newbees->IndexOf(","); // 1,1,4  -> 1,4   // 1 -> -
+						String^ newTop = "";
+						if (kamai == -1) {
+							newTop = newbees;
+							newbees = "-";
+						}
+						else {
+							newTop = newbees->Substring(0, kamai);  //?
+							newbees = newbees->Substring(kamai + 1);
+						}
+						nw->Text = newbees;
+						this->Refresh();
+
+						r->Text = newTop;
+						//runExp[j] = time +  matrix[i][j]);
+						nw->Text = newbees;
+						this->Refresh();
+						// empty and fill with head of new
+						runExp[j] += min(Quanum, matrix[System::Convert::ToInt32(newTop)][j+3]); // update runexp for new running proc: runexp[j]+=matrix[head of new][j]
+						runner = System::Convert::ToInt32(newTop);
+					}
+
+				//	if (time == runExp[j]) {
+				//		//String^ lblName = "lb" + (j * 5 + 2).ToString(); // find label name of cpu/io j lb+ j*5+2 
+				//		Control^ r = getEl(j, 2);
+				//		textBox3->Text += "\r\n label: " + r->Text;
+				//		Control^ t = getEl(j, 4);
+				//		if (r->Text == "-")
+				//			continue;
+				//		if (matrix[i][j] == 0) {  //
+				//			if (t->Text == "-")
+				//				t->Text = r->Text;
+				//			else
+				//				t->Text += "," + r->Text;
+				//		}//
+				//		else {
+				//			// put in new
+				//			// update exp
+				//			// update new b-time
+				//		}
+
+				//		r->Text = "-";
+				//		this->Refresh();
+				//		Control^ nw = getEl(j, 0);
+				//		String^ newbees = nw->Text;
+				//		if (newbees == "-")
+				//			continue;
+				//		int kamai = newbees->IndexOf(","); // 1,1,4  -> 1,4   // 1 -> -
+				//		String^ newTop = "";
+				//		if (kamai == -1) {
+				//			newTop = newbees;
+				//			newbees = "-";
+				//		}
+				//		else {
+				//			newTop = newbees->Substring(0, kamai);  //?
+				//			newbees = newbees->Substring(kamai + 1);
+				//		}
+				//		nw->Text = newbees;
+				//		this->Refresh();
+
+				//		r->Text = newTop;
+				//		nw->Text = newbees;
+				//		this->Refresh();
+				//		// empty and fill with head of new
+				//		runExp[j] += matrix[System::Convert::ToInt32(newTop)][j]; // update runexp for new running proc: runexp[j]+=matrix[head of new][j]
+
+				//	}
+				//// running lable:
+				
+				if (matrix[i][0] == time) {  // arrival is matching with time						
+					for (int j = 3; j < n && matrix[i][j] != 0; j++) {
+						Control^ runningPcs = getEl(j - 3, 2); // state 2= running
+						//if (matrix[i][j] <= Quanum) {//**
+						if (runningPcs->Text == "-") {  // running of resource j is vacant
+							runningPcs->Text = "";
+							runningPcs->Text += matrix[i][1];// put id in running
+							runExp[j - 3] = time + min(Quanum, matrix[i][j]);  // now + quantum  
+							matrix[i][j] = Quanum < matrix[i][j] ? Quanum - matrix[i][j] : 0;
+							this->Refresh();
+							continue;
+						}
+						//if (runExp[j - 3] == time) {
+						//	if (matrix[i][j] > Quanum) {
+						//		Control^ runningPcs = getEl(j - 3, 2); // state 2= running
+						//		runningPcs->Text = "-";
+						//		//matrix[i][j] = matrix[i][j] - Quanum;// put id at the end of New
+
+
+
+
+						//		String^ labelName = "lb" + ((j - 3) * 5 + 3).ToString();  // waiting
+						//		textBox3->Text += "\r\n label: " + labelName;
+						//		for each (Control ^ c in this->Controls)
+						//			if (c->Name == labelName) {
+						//				textBox3->Text += "\r\n label: " + labelName + "Found!";
+						//				if (c->Text == "-") {
+						//					c->Text = "";
+						//					c->Text += runningPcs->Text;
+						//				}
+						//				else c->Text += ", " + runningPcs->Text;
+						//				this->Refresh();
+						//			}
+						//	}
+						//	//this->Refresh();
+						//	//continue;
+
+
+						//}
+
+
+						
+						
+						//New:
+						//if (matrix[i][j] != 0) { // j=4 -> "lb(j-3)*5   
+						String^ labelName = "lb" + ((j - 3) * 5).ToString();
+						textBox3->Text += "\r\n label: " + labelName;
+						for each (Control ^ c in this->Controls)
+							if (c->Name == labelName) {
+								textBox3->Text += "\r\n label: " + labelName + "Found!";
+								if (c->Text == "-") {
+									c->Text = "";
+									c->Text += matrix[i][1];
+								}
+								else c->Text += ", " + matrix[i][1];
+								this->Refresh();
+							}
+
+					}
+				}
+			}
+		}
+
+
+	}
+}
+
+private: System::Void button4_Click(System::Object^ sender, System::EventArgs^ e) {
+	int matrix[1000][n]{};
+	int lim[n];
+	System::String^ ads = textBox3->Text;
+
+	int maxTime = 1;
+	for (int i = 0; i < n; i++)
+		lim[i] = 0;
+	try {
+		//reading the file:
+		StreamReader^ reader = gcnew   StreamReader(ads);
+
+		do
+		{
+			String^ line = reader->ReadLine();
+			// 0 0  6  8 15 6 10 7 10 8 13 7 15 3 spilte(line,' ')
+			// newE ? 0 -> 0
+
+			String^ tp = "";
+			int clmn = 0;
+			for (int j = 0; j < line->Length; j++) {
+				if (line[j] != ' ')
+					tp += line[j];
+				else if (line[j] == ' ') {
+					// tp convert to int 
+					int IntTp = int::Parse(tp); // string to int
+					tp = "";
+					// tp saved in matrix[row][j]
+					matrix[rowN][clmn] = IntTp;
+					if (clmn == 0)
+
+						lim[0] = max(lim[0], IntTp);
+					else {
+						lim[clmn] += IntTp;
+					}
+					clmn++;
+				}
+			}
+
+			if (tp != "") {
+				int IntTp = int::Parse(tp); //  string^ to int
+				tp = "";
+				// tp saved in matrix[row][j]
+				matrix[rowN][clmn] = IntTp;
+				if (clmn == 0)
+					lim[0] = max(lim[0], IntTp);
+				else {
+					lim[clmn] += IntTp;
+				}
+				clmn++;
+			}
+			//concerting string^ to strong: string^ line to string line
+			using namespace Runtime::InteropServices;
+			const char* chars =
+				(const char*)(Marshal::StringToHGlobalAnsi(line)).ToPointer();
+
+			textBox3->Text = textBox3->Text + "\r\n" + line;
+			rowN++;
+		} while (reader->Peek() != -1); // using do while to read till end of file
+
+		for (int i = 3; i < n; i++)
+			maxTime = max(maxTime, lim[i]);
+		maxTime += lim[0];
+	}
+	catch (System::Exception^ e) {}
+	int c = 1;
+	int time = -1;
+	textBox1->Text = time.ToString();
+	this->Refresh();
+	int runExp[n];
+	for (int t = 0; t < n; t++)
+		runExp[t] = -2;
+	while (true) {
+		c++;
+		if (time > maxTime)
+			break;
+		String^ temp = time.ToString() + ":" + floor(c * 59 / 9).ToString(); //59 is sec
+		textBox1->Text = temp;
+		this->Refresh();
+
+		if (c == 9) {
+			time++;
+			c = 1;
+			// ready to go to running 
+			// int running vacant =12 
+			for (int i = 0; i < rowN; i++) {
+				for (int j = 0; j < n; j++)
+
+					if (time == runExp[j]) {
+						//String^ lblName = "lb" + (j * 5 + 2).ToString(); // find label name of cpu/io j lb+ j*5+2 
+						Control^ r = getEl(j, 2);
+						textBox3->Text += "\r\n label: " + r->Text;
+						Control^ t = getEl(j, 4);
+						if (r->Text == "-")
+							continue;
+						if (t->Text == "-")
+							t->Text = r->Text;
+						else
+							t->Text += "," + r->Text;
+						r->Text = "-";
+						this->Refresh();
+						Control^ nw = getEl(j, 0);
+						String^ newbees = nw->Text;
+						if (newbees == "-")
+							continue;
+						int kamai = newbees->IndexOf(","); // 1,1,4  -> 1,4   // 1 -> -
+						String^ newTop = "";
+						if (kamai == -1) {
+							newTop = newbees;
+							newbees = "-";
+						}
+						else {
+							newTop = newbees->Substring(0, kamai);  //?
+							newbees = newbees->Substring(kamai + 1);
+						}
+						nw->Text = newbees;
+						this->Refresh();
+
+						r->Text = newTop;
+						nw->Text = newbees;
+						this->Refresh();
+						// empty and fill with head of new
+						runExp[j] += matrix[System::Convert::ToInt32(newTop)][j]; // update runexp for new running proc: runexp[j]+=matrix[head of new][j]
+
+					}
+				// running :
+				if (matrix[i][0] == time) {  // arrival is matching with time						
+					for (int j = 3; j < n && matrix[i][j] != 0; j++) {
+						Control^ runningPcs = getEl(j - 3, 2); // state 2= running
+						if (runningPcs->Text == "-") {  // running of resource j is vacant
+							runningPcs->Text = "";
+							runningPcs->Text += matrix[i][1];// put id in running
+
+							runExp[j - 3] = time + matrix[i][j];  // now + duration
+							this->Refresh();
+							continue;
+						}
+
+						//if (matrix[i][j] != 0) { // j=4 -> "lb(j-3)*5   
+						String^ labelName = "lb" + ((j - 3) * 5).ToString();
+						textBox3->Text += "\r\n label: " + labelName;
+						for each (Control ^ c in this->Controls)
+							if (c->Name == labelName) {
+								textBox3->Text += "\r\n label: " + labelName + "Found!";
+								if (c->Text == "-") {
+									c->Text = "";
+									c->Text += matrix[i][1];
+								}
+								//else c->Text += ", " + matrix[i][1];
+								
+								this->Refresh();
+								c->Text == "-";
+								this->Refresh();
+
+							}
+
+					}
+				}
+			}
+		}
+
+
+	}
+	
+}
+	 
 
 };
 }
-/*
-*/
